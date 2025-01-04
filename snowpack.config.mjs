@@ -5,29 +5,24 @@ export default {
     src: { url: '/dist' },
   },
   plugins: [
-    [
-      '@snowpack/plugin-typescript',
-      {
-        /* Yarn PnP workaround: see https://www.npmjs.com/package/@snowpack/plugin-typescript */
-        ...(process.versions.pnp ? { tsc: 'yarn pnpify tsc' } : {}),
-      },
-    ],
+    '@snowpack/plugin-typescript',
   ],
   routes: [
-    /* Enable an SPA Fallback in development: */
-    // {"match": "routes", "src": ".*", "dest": "/index.html"},
+    { match: 'routes', src: '.*', dest: '/index.html' },
   ],
   optimize: {
-    /* Example: Bundle your final build: */
-    // "bundle": true,
+    bundle: true,
+    minify: true,
+    target: 'es2018',
   },
   packageOptions: {
-    /* ... */
+    /* Add specific package optimizations if needed */
   },
   devOptions: {
-    /* ... */
+    open: 'default', // Open the default browser in dev mode
   },
   buildOptions: {
-    /* ... */
+    out: 'build', // Output directory for Vercel
+    baseUrl: '/', // Adjust if hosting on a subpath
   },
 };
